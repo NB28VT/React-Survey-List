@@ -1,0 +1,78 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Survey List</title>
+    <!-- Script tags including React -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react-dom.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./index.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  </head>
+<body>
+  <div id="app">
+
+  </div>
+
+
+  <script type="text/babel">
+    class App extends React.Component {
+      render() {
+        return (
+          <div className="surveyList">
+            <SurveyList title="FunAtLearn Survey"/>
+          </div>
+        )
+      }
+    }
+
+    class SurveyList extends React.Component {
+      // GET SURVEY DEETS AJAX
+      constructor(props){
+        super(props);
+        this.state = {
+          surveyItems: this.getItems();
+        }
+      }
+
+
+      getItems(){
+
+
+      }
+
+
+
+
+
+      render() {
+        return (
+          <div className="title">
+            <h1>{this.props.title}</h1>
+          </div>
+        )
+      }
+    }
+
+    class SurveyItem extends React.Component {
+      render(){
+        return(
+            <div className="surveyItem">
+              <h3>{this.props.title}</h3>
+              <h3>{this.props.creationDate}</h3>
+              <p>{this.props.shortDescription}</p>
+              <p>{this.props.description}</p>
+            </div>
+        )
+      }
+    }
+
+    var mount = document.querySelector("#app");
+    ReactDOM.render(<App/>, mount);
+  </script>
+
+</body>
+
+
+</html>
