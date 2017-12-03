@@ -21,35 +21,47 @@
       render() {
         return (
           <div className="surveyList">
-            <SurveyList title="FunAtLearn Survey"/>
+            <SurveyList title="FunAtLearn Survey" url="http://www.mocky.io/v2/56fcf6871000000e13aed252"/>
           </div>
         )
       }
     }
 
     class SurveyList extends React.Component {
-      // GET SURVEY DEETS AJAX
       constructor(props){
         super(props);
         this.state = {
-          surveyItems: this.getItems();
+          surveyItems: []
         }
       }
 
-
-      getItems(){
-
-
+      componentDidMount(){
+        this.getItems();
       }
 
-
-
-
+      getItems(){
+        $.ajax({
+          url: this.props.url,
+          type: "get",
+          dataType: "JSONP",
+          success: function(data) {
+            console.log(data);
+            this.setState({surveyItems: data})
+          }.bind(this),
+          error: function(xhr, status, error){
+            console.log(error);
+          }.bind(this)
+        })
+      }
 
       render() {
+        const surveyItems = this.state.surveyItems;
         return (
           <div className="title">
             <h1>{this.props.title}</h1>
+            {surveyItems.map((item) => (
+              <SurveyItem title={item.title} creationDate={item.creation_date} shortDescription={item.short_descrption} description={item.description}/>
+            ))}
           </div>
         )
       }
